@@ -1,38 +1,509 @@
-.App {
+@font-face {
+  font-family: 'PixelEmulator';
+  src: local('PixelEmulator'), url('./assets/Pixel Emulator.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'PokemonFont';
+  src: local('PokemonFont'), url('./assets/Pokemon Hollow.ttf') format('truetype');
+}
+
+body {
+  font-family: 'PixelEmulator', sans-serif;
+  margin: 0;
+  background-image: url('./assets/BLUEBG.gif');
+  background-repeat: repeat;
+  color: #333;
+}
+
+.pokedex-container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 0;
+  background-color: #dcc6fb;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-banner {
+  background-color: #1a0648;
+  color: white;
+  padding: 15px 20px;
   text-align: center;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.pokemon-logo-banner {
+  max-width: 200px;
+  width: auto;
+  height: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.pokedex-info-header {
+  background-color: #cebbfa;
+  color: #333;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-left-info {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  background-image: url('./assets/PIKACHUGIF3.gif');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.pokedex-info-header h1 {
+  color: white;
+  font-family: 'PokemonFont', sans-serif;
+  font-size: 2.8em;
+  margin-bottom: 3px;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.authors {
+  font-size: 1.1em;
+  color: white;
+  font-family: 'PokemonFont', sans-serif;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.header-right-info {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.header-right-info span {
+  margin-left: 10px;
+}
+
+.my-team {
+  font-weight: bold;
+  font-family: 'PixelEmulator', sans-serif;
+  color: black; /* Made "MY TEAM" text black */
+}
+
+main {
+  padding: 10px;
+  font-family: 'PixelEmulator', sans-serif;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pagination-controls-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.pagination-button {
+  padding: 8px 15px;
+  font-family: 'PixelEmulator', sans-serif;
+  font-size: 1em;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover:enabled {
+  background-color: #ddd;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-family: 'PixelEmulator', sans-serif;
+  font-size: 1em;
+}
+
+.search-input {
+  padding: 10px;
+  border: 2px solid #4a90e2;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #f0f0f0;
+  color: #333;
+  box-sizing: border-box;
+  font-family: 'PixelEmulator', sans-serif;
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.type-select {
+  padding: 10px;
+  border: 2px solid #4a90e2;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #f0f0f0;
+  color: #333;
+  box-sizing: border-box;
+  font-family: 'PixelEmulator', sans-serif;
+  cursor: pointer;
+  max-height: 200px;
+  overflow-y: auto;
+  flex-grow: 1;
+  min-width: 150px;
+}
+
+#type-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.pokemon-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.pokemon-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-family: 'PixelEmulator', sans-serif;
+  text-align: center;
+}
+
+.pokemon-image-placeholder {
+  height: 100px;
+  width: 100px;
+  background-color: #eee;
+  color: #777;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  font-size: 0.8em;
+  border-radius: 5px; /* Optional: match image border-radius */
+  margin-bottom: 10px;
+}
+
+.pokemon-image {
+  height: 100px;
+  width: 100px;
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+
+.pokemon-name {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 10px;
+  font-family: 'PixelEmulator', sans-serif;
+}
+
+.pokemon-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.info-button,
+.add-to-team-button {
+  padding: 10px 15px;
+  border: none;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'PixelEmulator', sans-serif;
+  width: 100%;
+}
+
+.info-button:hover,
+.add-to-team-button:hover {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+.add-to-team-button {
+  background-color: #4CAF50;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.add-to-team-button:hover {
+  background-color: #45a049;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.info-button {
+  background-color: #007BFF;
+  color: white;
+}
+
+.info-button:hover {
+  background-color: #0056b3;
+}
+
+.team-modal,
+.info-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-width: 90vw;
+  max-height: 70vh;
+  overflow-y: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+}
+
+.team-modal h3,
+.info-modal h3 {
+  color: #333 !important; /* Ensuring black color */
+  font-family: 'PixelEmulator', sans-serif;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  margin-top: 0;
+  padding: 0;
+  font-size: 1.5em;
+}
+
+.team-modal .team-pokemon-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  overflow-x: auto;
+  width: auto;
+  margin-bottom: 15px;
+  align-items: flex-start;
+}
+
+.team-modal .team-pokemon-item {
+  min-width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-pokemon-image {
+  height: 70px;
+  width: 70px;
+  margin-bottom: 5px;
+}
+
+.team-pokemon-name {
+  font-family: 'PixelEmulator', sans-serif;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.team-pokemon-stats {
+  font-family: 'PixelEmulator', sans-serif;
+  font-size: 0.8em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.remove-from-team-button,
+.clear-team-button {
+  padding: 8px 15px;
+  font-family: 'PixelEmulator', sans-serif;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 5px;
+}
+
+.remove-from-team-button {
+  background-color: #e03333; /* A standard red */
+  color: white;
+}
+
+.remove-from-team-button:hover {
+  background-color: #c82e2e;
+}
+
+.clear-team-button {
+  background-color: #e03333; /* Same standard red as Remove */
+  color: white;
+}
+
+.clear-team-button:hover {
+  background-color: #c82e2e;
+}
+
+.close-modal-button {
+  padding: 10px 20px;
+  background-color: #a80f0f; /* A darker red for Close */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+  font-family: 'PixelEmulator', sans-serif;
+  margin-top: 15px;
+}
+
+.close-modal-button:hover {
+  background-color: #8c0c0c;
+}
+
+.info-modal {
+  background-color: #FFFFFF;
+  border: 4px solid #333;
+}
+
+.info-modal h3 {
+  color: #333 !important;
+  font-family: 'PixelEmulator', sans-serif;
+}
+
+.info-modal ul li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+  font-family: 'PixelEmulator', sans-serif;
+}
+
+.info-modal ul li:last-child {
+  border-bottom: none;
+}
+
+.styled-close-button {
+  padding: 10px 20px;
+  background-color: #dd0606; /* Dark red from before */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+  font-family: 'PixelEmulator', sans-serif;
+  margin-top: 15px;
+}
+
+.styled-close-button:hover {
+  background-color: #555; /* Kept the darker hover for consistency */
+}
+
+.battle-buttons-header {
+  display: flex;
+  gap: 10px; /* Spacing between the buttons */
+  margin-top: 5px; /* Spacing between "MY TEAM" and the buttons */
+}
+
+.pro-battle-button,
+.basic-battle-button {
+  padding: 10px 15px; /* Slightly increased padding */
+  border: 2px solid #8a6acb; /* Nice purple border */
+  border-radius: 8px; /* More rounded corners */
+  cursor: pointer;
+  font-size: 1em;
+  font-family: 'PixelEmulator', sans-serif; /* Using your Pixel Emulator font! */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow for better readability */
+}
+
+.pro-battle-button {
+  background-color: #7b68ee; /* A vibrant cornflower blue */
+  color: #f0f8ff; /* Light alice blue text */
+}
+
+.pro-battle-button:hover {
+  background-color: #6a5acd; /* Darker slate blue on hover */
+  border-color: #6a5acd;
+}
+
+.basic-battle-button {
+  background-color: #a020f0; /* A lovely magenta */
+  color: #f8f0e3; /* Light ivory text */
+}
+
+.basic-battle-button:hover {
+  background-color: #8b008b; /* Dark magenta on hover */
+  border-color: #8b008b;
+}
+
+.close-modal-button {
+  background-color: #e74c3c; /* Red background for close button */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 20px;
+}
+
+.close-modal-button:hover {
+  background-color: #c0392b; /* Darker red on hover */
 }
